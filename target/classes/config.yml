@@ -1,0 +1,55 @@
+# MythofyLaunchPads Configuration
+# Author: KingDragonCat
+
+# Available launchpad types
+launchpads:
+  # Basic wooden launchpad
+  wooden:
+    name: "&eBasic Wooden Launchpad"
+    block-type: OAK_PRESSURE_PLATE
+    upward-velocity: 1.5
+    forward-velocity: 1.0
+    cooldown: 5 # seconds
+
+  # Stone launchpad
+  stone:
+    name: "&bStone Launchpad"
+    block-type: STONE_PRESSURE_PLATE
+    upward-velocity: 2.0
+    forward-velocity: 1.5
+    cooldown: 3
+
+  # Gold launchpad
+  gold:
+    name: "&6Gold Launchpad"
+    block-type: LIGHT_WEIGHTED_PRESSURE_PLATE
+    upward-velocity: 2.5
+    forward-velocity: 2.0
+    cooldown: 2
+
+  # Iron launchpad
+  iron:
+    name: "&7Iron Launchpad"
+    block-type: HEAVY_WEIGHTED_PRESSURE_PLATE
+    upward-velocity: 3.0
+    forward-velocity: 2.5
+    cooldown: 1
+
+  # Slime block launchpad
+  slime:
+    name: "&aSlime Block Launchpad"
+    block-type: SLIME_BLOCK
+    upward-velocity: 4.0
+    forward-velocity: 2.0
+    cooldown: 2
+
+# Messages
+messages:
+  prefix: "&8[&eMythofyLaunchPads&8] "
+  no-permission: "&cYou don't have permission to use this command!"
+  player-only: "&cThis command can only be used by players!"
+  invalid-launchpad: "&cInvalid launchpad type!"
+  launchpad-given: "&aYou have been given a %name%&a!"
+  cooldown-active: "&cYou need to wait %seconds% seconds before using a launchpad again!"
+  config-reloaded: "&aConfiguration reloaded successfully!"
+

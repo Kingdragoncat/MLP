@@ -1,0 +1,27 @@
+name: MythofyLaunchPads
+version: '1.0'
+main: net.mythofy.mythofyLaunchPads.MythofyLaunchPads
+api-version: '1.16'
+author: KingDragonCat
+description: >
+  MythofyLaunchPads adds fully configurable launchpads to your server! Easily create launchpads with different materials, velocities, and cooldowns. Give players a fun way to launch themselves across your world. Includes in-game commands, permissions, and reloadable configuration. Perfect for hubs, minigames, or creative builds!
+
+commands:
+  launchpad:
+    description: Give yourself or another player a launchpad
+    usage: /launchpad <type> [amount] [player]
+    aliases: [mlp, mythofylaunchpad]
+
+permissions:
+  mythofylaunchpads.command:
+    description: Allows access to the /launchpad command
+    default: op
+  mythofylaunchpads.admin:
+    description: Allows giving launchpads to other players
+    default: op
+  mythofylaunchpads.reload:
+    description: Allows reloading the configuration
+    default: op
+  mythofylaunchpads.use:
+    description: Allows using launchpads
+    default: true

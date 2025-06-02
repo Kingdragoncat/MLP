@@ -1,0 +1,6 @@
+net\mythofy\mythofyLaunchPads\config\ConfigManager.class
+net\mythofy\mythofyLaunchPads\MythofyLaunchPads.class
+net\mythofy\mythofyLaunchPads\listeners\LaunchpadListerner.class
+net\mythofy\mythofyLaunchPads\managers\LaunchpadManager.class
+net\mythofy\mythofyLaunchPads\commands\LaunchpadCommand.class
+net\mythofy\mythofyLaunchPads\config\LaunchpadType.class
