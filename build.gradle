@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'net.mythofy'
@@ -16,6 +17,9 @@ repositories {
 dependencies {
     // PaperMC API for Minecraft plugin development
     compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    
+    // bStats metrics
+    implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
 sourceCompatibility = '17'
@@ -27,6 +31,10 @@ jar {
             'Main-Class': 'net.mythofy.mythofyLaunchPads.MythofyLaunchPads'
         )
     }
+}
+
+shadowJar {
+    relocate 'org.bstats', 'net.mythofy.mythofyLaunchPads.bstats'
 }
 
 processResources {

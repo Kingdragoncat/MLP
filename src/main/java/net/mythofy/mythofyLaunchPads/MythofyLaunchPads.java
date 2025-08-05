@@ -7,6 +7,7 @@ import net.mythofy.mythofyLaunchPads.config.ConfigManager;
 import net.mythofy.mythofyLaunchPads.listeners.LaunchpadListerner;
 import net.mythofy.mythofyLaunchPads.managers.LaunchpadManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bstats.bukkit.Metrics;
 
 public final class MythofyLaunchPads extends JavaPlugin {
 
@@ -39,6 +40,9 @@ public final class MythofyLaunchPads extends JavaPlugin {
         getCommand("syncwand").setExecutor(syncWandCommand);
         getCommand("setsync").setExecutor(setSyncCommand);
         getCommand("setsync").setTabCompleter(setSyncCommand);
+
+        // Initialize bStats metrics
+        new Metrics(this, 26793);
 
         getLogger().info("MythofyLaunchPads has been enabled!");
     }
