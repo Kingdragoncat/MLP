@@ -1,3 +1,4 @@
+
 package net.mythofy.mythofyLaunchPads.config;
 
 import org.bukkit.ChatColor;
@@ -7,8 +8,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.Set;
 
 public class ConfigManager {
+    public List<String> getMessageList(String path) {
+        List<String> list = plugin.getConfig().getStringList("messages." + path);
+        if (list == null || list.isEmpty()) {
+            String fallback = plugin.getConfig().getString("messages." + path);
+            if (fallback != null) {
+                return List.of(fallback);
+            }
+            return List.of("&cMessage list not found: " + path);
+        }
+        return list;
+    }
 
     private final JavaPlugin plugin;
     private final Map<String, LaunchpadType> launchpadTypes;
@@ -34,13 +48,15 @@ public class ConfigManager {
 
         for (String key : section.getKeys(false)) {
             ConfigurationSection launchpadSection = section.getConfigurationSection(key);
-            if (launchpadSection == null) continue;
+            if (launchpadSection == null)
+                continue;
 
             String name = launchpadSection.getString("name", key);
             String blockTypeName = launchpadSection.getString("block-type", "STONE_PRESSURE_PLATE");
             double upwardVelocity = launchpadSection.getDouble("upward-velocity", 1.0);
             double forwardVelocity = launchpadSection.getDouble("forward-velocity", 1.0);
             int cooldown = launchpadSection.getInt("cooldown", 5);
+            boolean synced = launchpadSection.getBoolean("synced", false);
 
             Material blockType;
             try {
@@ -50,9 +66,24 @@ public class ConfigManager {
                 blockType = Material.STONE_PRESSURE_PLATE;
             }
 
-            LaunchpadType launchpadType = new LaunchpadType(key, name, blockType, upwardVelocity, forwardVelocity, cooldown);
+            LaunchpadType launchpadType = new LaunchpadType(key, name, blockType, upwardVelocity, forwardVelocity,
+                    cooldown, synced);
             launchpadTypes.put(key, launchpadType);
             plugin.getLogger().info("Loaded launchpad type: " + key);
+        }
+
+        // Add new synced launchpad type if not present in config
+        if (!launchpadTypes.containsKey("synced")) {
+            LaunchpadType syncedType = new LaunchpadType(
+                    "synced",
+                    "Synced Launchpad",
+                    Material.END_PORTAL_FRAME, // or any block you want
+                    1.0,
+                    1.0,
+                    5,
+                    true);
+            launchpadTypes.put("synced", syncedType);
+            plugin.getLogger().info("Loaded default synced launchpad type.");
         }
     }
 
@@ -62,6 +93,10 @@ public class ConfigManager {
 
     public Map<String, LaunchpadType> getLaunchpadTypes() {
         return launchpadTypes;
+    }
+
+    public Set<String> getLaunchpadTypeKeys() {
+        return launchpadTypes.keySet();
     }
 
     public String getMessage(String path) {

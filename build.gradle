@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group = 'net.mythofy'
+version = '1.4-Release'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    // PaperMC API for Minecraft plugin development
+    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'net.mythofy.mythofyLaunchPads.MythofyLaunchPads'
+        )
+    }
+}
+
+processResources {
+    from('src/main/resources')
+    filteringCharset = 'UTF-8'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

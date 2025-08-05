@@ -1,6 +1,8 @@
 package net.mythofy.mythofyLaunchPads;
 
 import net.mythofy.mythofyLaunchPads.commands.LaunchpadCommand;
+import net.mythofy.mythofyLaunchPads.commands.SyncWandCommand;
+import net.mythofy.mythofyLaunchPads.commands.SetSyncCommand;
 import net.mythofy.mythofyLaunchPads.config.ConfigManager;
 import net.mythofy.mythofyLaunchPads.listeners.LaunchpadListerner;
 import net.mythofy.mythofyLaunchPads.managers.LaunchpadManager;
@@ -20,19 +22,32 @@ public final class MythofyLaunchPads extends JavaPlugin {
         this.configManager = new ConfigManager(this);
         this.launchpadManager = new LaunchpadManager(this);
 
+        // Initialize commands
+        SyncWandCommand syncWandCommand = new SyncWandCommand(this);
+        SetSyncCommand setSyncCommand = new SetSyncCommand(this);
+        LaunchpadCommand launchpadCommand = new LaunchpadCommand(this);
+
         // Register events
-        getServer().getPluginManager().registerEvents(new LaunchpadListerner(this), this);
+        LaunchpadListerner listener = new LaunchpadListerner(this);
+        listener.setSyncWandCommand(syncWandCommand);
+        listener.setSetSyncCommand(setSyncCommand);
+        getServer().getPluginManager().registerEvents(listener, this);
 
         // Register commands
-        getCommand("launchpad").setExecutor(new LaunchpadCommand(this));
-        getCommand("launchpad").setTabCompleter(new LaunchpadCommand(this));
+        getCommand("launchpad").setExecutor(launchpadCommand);
+        getCommand("launchpad").setTabCompleter(launchpadCommand);
+        getCommand("syncwand").setExecutor(syncWandCommand);
+        getCommand("setsync").setExecutor(setSyncCommand);
+        getCommand("setsync").setTabCompleter(setSyncCommand);
 
         getLogger().info("MythofyLaunchPads has been enabled!");
     }
 
     @Override
     public void onDisable() {
-        // Save any data if needed
+        if (launchpadManager != null) {
+            launchpadManager.saveData();
+        }
         getLogger().info("MythofyLaunchPads has been disabled!");
     }
 

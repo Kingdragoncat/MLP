@@ -11,14 +11,17 @@ public class LaunchpadType {
     private final double upwardVelocity;
     private final double forwardVelocity;
     private final int cooldown;
+    private final boolean synced;
 
-    public LaunchpadType(String id, String name, Material blockType, double upwardVelocity, double forwardVelocity, int cooldown) {
+    public LaunchpadType(String id, String name, Material blockType, double upwardVelocity, double forwardVelocity,
+            int cooldown, boolean synced) {
         this.id = id;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
         this.blockType = blockType;
         this.upwardVelocity = upwardVelocity;
         this.forwardVelocity = forwardVelocity;
         this.cooldown = cooldown;
+        this.synced = synced;
     }
 
     public String getId() {
@@ -44,4 +47,5 @@ public class LaunchpadType {
     public int getCooldown() {
         return cooldown;
     }
+
 }

@@ -1,7 +1,17 @@
 # MythofyLaunchPads Configuration
-# Author: KingDragonCat
+# Author: Kingdragoncat
+
+# This is the main configuration file for MythofyLaunchPads.
+# You can customize all aspects of the plugin here.
 
 # Available launchpad types
+# Each launchpad type has the following properties:
+#   name: The display name of the launchpad.
+#   block-type: The material of the block that acts as a launchpad.
+#   upward-velocity: The upward force applied to the player.
+#   forward-velocity: The forward force applied to the player.
+#   cooldown: The time in seconds before a player can use another launchpad.
+#   synced: Whether the launchpad is a special "synced" type.
 launchpads:
   # Basic wooden launchpad
   wooden:
@@ -35,7 +45,7 @@ launchpads:
     forward-velocity: 2.5
     cooldown: 1
 
-  # Slime block launchpad
+  # Slime block launchpad (normal launchpad)
   slime:
     name: "&aSlime Block Launchpad"
     block-type: SLIME_BLOCK
@@ -43,6 +53,7 @@ launchpads:
     forward-velocity: 2.0
     cooldown: 2
 
+# Default launchpad type
 # Messages
 messages:
   prefix: "&8[&eMythofyLaunchPads&8] "
@@ -52,4 +63,8 @@ messages:
   launchpad-given: "&aYou have been given a %name%&a!"
   cooldown-active: "&cYou need to wait %seconds% seconds before using a launchpad again!"
   config-reloaded: "&aConfiguration reloaded successfully!"
-
+  help:
+    - "&e=== MythofyLaunchPads Help ==="
+    - "&6/launchpad <type> [amount] [player] &7- Get a launchpad of the specified type."
+    - "&6/launchpad reload &7- Reload the plugin configuration."
+    - "&6/types: &e%types%"
